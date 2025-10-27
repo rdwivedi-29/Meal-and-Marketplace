@@ -1,22 +1,29 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 import os
-import socket
 
+# Read from env; fall back to local sqlite for dev
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./app.db")
 
-# 🧩 Force IPv4 resolution for Render → Supabase
-if "supabase.co" in DATABASE_URL:
-    try:
-        # Resolve IPv4 address manually
-        ipv4_addr = socket.gethostbyname("db.sjzmvdgqiywvayenhygc.supabase.co")
-        os.environ["PGHOSTADDR"] = ipv4_addr
-    except Exception as e:
-        print("⚠️ Could not resolve IPv4 address:", e)
+# Ensure sslmode=require for Postgres URLs (Render → Supabase)
+if DATABASE_URL.startswith("postgresql://") and "sslmode=" not in DATABASE_URL:
+    sep = "&" if "?" in DATABASE_URL else "?"
+    DATABASE_URL = f"{DATABASE_URL}{sep}sslmode=require"
 
-# For local SQLite fallback
-connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
+# Connect args
+connect_args = {}
+if DATABASE_URL.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True, connect_args=connect_args)
+# Pooling-friendly engine (works with Supabase pgBouncer)
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    pool_size=5,
+    max_overflow=10,
+    pool_recycle=1800,
+    connect_args=connect_args,
+)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
