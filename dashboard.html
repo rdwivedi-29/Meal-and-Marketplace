@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="api-base" content="">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Meal & Marketplace — Dashboard</title>
+  <meta name="description" content="Personalized dashboard for meal plan tracking and marketplace." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext y='70' x='10' font-size='80'%3E%F0%9F%8D%B4%3C/text%3E%3C/svg%3E" />
+  <script src="/config.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-bar">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true">🍴</span>
+        <span class="brand-text">Meal & Marketplace</span>
+      </a>
+
+      <!-- Centered welcome text -->
+      <div class="header-center">
+        <div class="welcome-line" id="welcomeSub">Welcome</div>
+      </div>
+
+      <!-- Top-right profile -->
+      <div class="profile-wrap">
+        <div class="profile-info">
+          <div class="profile-avatar" id="profileAvatar">
+            <span id="avatarInitials">JD</span>
+          </div>
+          <span class="profile-name" id="profileName">John Doe</span>
+        </div>
+        <button id="profileBtn" class="profile-trigger" aria-expanded="false" aria-controls="profileMenu">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div id="profileMenu" class="profile-menu" hidden>
+          <button data-panel="inbox" class="menu-item">
+            <span class="icon">📥</span> Inbox
+            <span id="inboxBadge" class="badge" aria-hidden="true"></span>
+          </button>
+          <button data-panel="userProfile" class="menu-item">
+            <span class="icon">👤</span> User Profile
+          </button>
+          <button data-panel="changeAccount" class="menu-item">
+            <span class="icon">🔄</span> Change Account
+          </button>
+          <button data-panel="generateReport" class="menu-item">
+            <span class="icon">📊</span> Generate Report
+          </button>
+          <button data-panel="usageHistory" class="menu-item">
+            <span class="icon">🍽️</span> Meal Usage History
+          </button>
+          <hr class="menu-sep" />
+          <button id="signOut" class="menu-item danger">
+            <span class="icon">🚪</span> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dash-grid container">
+      <aside class="left-rail">
+        <div class="rail-section">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <h4 class="h5" style="margin:0;">My Listings & Status</h4>
+              <button id="clearListingsBtn" type="button" class="btn btn-sm btn-outline">Clear All</button>
+            </div>
+            <ul id="myListings" class="list"></ul>
+          </div>
+
+          <h3 class="h4">Meal Marketplace</h3>
+          <div class="card">
+            <h4 class="h5">Offer Meals</h4>
+            <form id="offerMealsForm" class="form">
+              <div class="field">
+                <label for="mealsOffered">Meals Offered</label>
+                <input id="mealsOffered" type="number" min="1" step="1" placeholder="3" />
+              </div>
+              <div class="field">
+                <label for="offerLocations">Locations</label>
+                <input id="offerLocations" type="text" placeholder="North Dining Hall" />
+              </div>
+              <div class="field">
+                <label for="pricePerMeal">Charge per Meal ($)</label>
+                <input id="pricePerMeal" type="number" min="0" step="0.01" placeholder="6.50" />
+              </div>
+              <div class="field">
+                <label for="mealType">Meal Type</label>
+                <select id="mealType">
+                  <option value="">Select type</option>
+                  <option value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary full">Offer</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h4 class="h5">Best Deals</h4>
+            <ul id="bestMealDeals" class="list"></ul>
+            <button id="seeAllMeals" class="btn btn-outline full">See All Meal Deals</button>
+          </div>
+
+          <h3 class="h4">General Marketplace</h3>
+          <div class="card">
+            <h4 class="h5">Offer Item</h4>
+            <form id="offerItemForm" class="form" enctype="multipart/form-data">
+              <div class="field">
+                <label for="itemImageFile">Image</label>
+                <input id="itemImageFile" type="file" accept="image/*" />
+              </div>
+              <div class="field">
+                <label for="itemName">Name</label>
+                <input id="itemName" type="text" placeholder="Discrete Math Book" />
+              </div>
+              <div class="field">
+                <label for="itemCategory">Category</label>
+                <select id="itemCategory">
+                  <option value="">Select</option>
+                  <option>Books</option>
+                  <option>Furniture</option>
+                  <option>Electronics</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="itemPrice">Price ($)</label>
+                <input id="itemPrice" type="number" min="0" step="0.01" placeholder="30.00" />
+              </div>
+              <div class="field">
+                <label for="itemNote">Extra Comment</label>
+                <input id="itemNote" type="text" placeholder="Condition, pickup info, etc." />
+              </div>
+              <button type="submit" class="btn btn-primary full">List Item</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h4 class="h5">Best Item Deals</h4>
+            <ul id="bestItemDeals" class="list"></ul>
+            <button id="seeMarketplace" class="btn btn-outline full">See Marketplace</button>
+          </div>
+
+        </div>
+      </aside>
+
+      <section class="main-panel">
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-title">Current Balance (Meals Left)</div>
+            <div id="kpiMealsLeft" class="kpi-value">—</div>
+            <div id="kpiAtRisk" class="kpi-sub">—</div>
+            <!-- Inline daily usage recorder below balance -->
+            <div class="daily-usage" style="margin-top: 1rem;">
+              <div class="h6" style="margin-bottom:8px; font-weight:600;">Record Today’s Usage</div>
+              <form id="dailyUsageForm" class="form">
+                <div class="field" style="margin-bottom:8px;">
+                  <label for="dailyMealsUsed">Meals Used</label>
+                  <input id="dailyMealsUsed" type="number" min="1" step="1" placeholder="1" />
+                </div>
+                <button type="submit" class="btn btn-primary full">Record</button>
+              </form>
+            <!-- History list removed from dashboard card. Usage history is now available under profile menu. -->
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title">Meals Used This Week</div>
+            <div id="kpiUsedWeek" class="kpi-value">—</div>
+            <div id="kpiUsedWeekSub" class="kpi-sub">—</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title">Trend vs. Last Week</div>
+            <div id="kpiTrend" class="kpi-value">—</div>
+            <div class="kpi-sub">Usage movement</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title">Predictable</div>
+            <div id="kpiPredict" class="kpi-value">—</div>
+            <div id="kpiPredictSub" class="kpi-sub">Projected expiry risk</div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="h5">Meals Used: This Week vs Last Week</div>
+            <div class="canvas-wrap">
+              <canvas id="chartWeekCompare" aria-label="Bar chart of meals used this week vs last week" role="img"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="h5">Campus Trend & Waste Forecast</div>
+            <div class="canvas-wrap">
+              <canvas id="chartCampusTrend" aria-label="Line chart of campus usage trend with waste estimate" role="img"></canvas>
+            </div>
+            <div id="wasteSummary" class="chart-sub">—</div>
+          </div>
+        </div>
+
+        <div class="tables-grid">
+          <div class="table-card">
+            <div class="table-head">
+              <div class="h5">All Meal Offers</div>
+              <div class="table-actions">
+                <input id="mealSearch" class="table-search" placeholder="Search location…" />
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table id="mealOffersTable" class="table">
+                <thead>
+                    <tr>
+                    <th>Seller</th>
+                    <th>Meals</th>
+                    <th>Location</th>
+                    <th>Type</th>
+                    <th>Price/Meal</th>
+                    <th>Posted</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-head">
+              <div class="h5">Marketplace Items</div>
+              <div class="table-actions">
+                <input id="itemSearch" class="table-search" placeholder="Search name/category…" />
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table id="itemsTable" class="table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>Posted</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <section class="testimonials">
+          <div class="testi-grid">
+            <div class="testi-card">
+              <div class="quote">"Matched my extra swipes in a day and made back real value."</div>
+              <div class="author">
+                <div class="avatar">J</div>
+                <div>
+                  <div class="name">Jordan P.</div>
+                  <div class="meta">Junior, IIT Chicago</div>
+                </div>
+              </div>
+            </div>
+            <div class="testi-stats">
+              <div class="stat">
+                <div class="stat-kpi">+$8.80</div>
+                <div class="stat-sub">avg. recovered per swipe</div>
+              </div>
+              <div class="stat">
+                <div class="stat-kpi">72%</div>
+                <div class="stat-sub">waste risk reduction</div>
+              </div>
+              <div class="stat">
+                <div class="stat-kpi">18h</div>
+                <div class="stat-sub">median time to match</div>
+              </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Comments section for students to leave feedback -->
+        <div class="card" style="margin-top: 1rem;">
+          <h4 class="h5">Leave a Comment</h4>
+          <form id="commentForm" class="form">
+            <div class="field">
+              <label for="commentBody">Your Comment</label>
+              <textarea id="commentBody" rows="3" placeholder="Share your experience..." style="width:100%;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary full">Post Comment</button>
+          </form>
+          <ul id="userCommentsList" class="list small-list"></ul>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">🍴</span>
+          <span class="brand-text">Meal Plan Arbitrage</span>
+        </a>
+        <p class="footer-copy">A smarter way to manage meal swipes and find value on campus.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Product</div>
+        <a href="index.html#how" class="footer-link">How It Works</a>
+        <a href="index.html#campus" class="footer-link">Campuses</a>
+        <a href="index.html#home" class="footer-link">Get Started</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Company</div>
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Contact</a>
+        <a href="#" class="footer-link">Careers</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Legal</div>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Campus Policy</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>© <span id="year"></span> Meal & Marketplace</div>
+      <div class="socials">
+        <a href="#" aria-label="X" class="social">X</a>
+        <a href="#" aria-label="Instagram" class="social">Instagram</a>
+        <a href="#" aria-label="LinkedIn" class="social">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="panelModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Close" data-close>&times;</button>
+      <div class="modal-header">
+        <h3 id="panelTitle" class="h3">Title</h3>
+        <p id="panelSub" class="sub">—</p>
+      </div>
+      <div id="panelBody"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="menu-root"></div>
+
+  <script src="dashboard.js"></script>
+  <script src="profile-popover.js"></script>
+</body>
+</html>

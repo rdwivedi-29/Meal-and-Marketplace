@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="api-base" content="">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    body {
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      width: 100%;
+      max-width: 360px;
+    }
+    .login-card h2 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+    .login-card .field {
+      margin-bottom: 12px;
+    }
+    .login-card .field label {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .login-card .field input {
+      width: 100%;
+      padding: 8px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .login-card button {
+      width: 100%;
+      padding: 10px;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .login-card button:hover {
+      background: var(--primary-dark);
+    }
+    #loginError {
+      color: #ef4444;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+  </style>
+  <script src="/config.js"></script>
+</head>
+<body>
+  <div class="login-card">
+    <h2>Admin Login</h2>
+    <form id="adminLoginForm">
+      <div class="field">
+        <label for="adminEmail">Email</label>
+        <input id="adminEmail" type="email" placeholder="admin@example.com" required />
+      </div>
+      <div class="field">
+        <label for="adminPassword">Password</label>
+        <input id="adminPassword" type="password" placeholder="Password" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <div id="loginError" hidden>Invalid admin credentials.</div>
+  </div>
+  <script src="admin-login.js"></script>
+</body>
+</html>

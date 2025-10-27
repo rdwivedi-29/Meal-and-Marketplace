@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="api-base" content="">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meal & Marketplace</title>
+  <meta name="description" content="Save money and stop wasting meal swipes. Match extra meals with hungry students on your campus." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext y='70' x='10' font-size='80'%3E%F0%9F%8D%B4%3C/text%3E%3C/svg%3E" />
+  <script src="/config.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand">
+        <span class="brand-mark" aria-hidden="true">🍴</span>
+        <span class="brand-text">Meal & Marketplace</span>
+      </a>
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#how" class="nav-link">How It Works</a>
+        <a href="#campus" class="nav-link">Campuses</a>
+      </nav>
+      <div class="auth-cta">
+        <button class="btn btn-outline" data-open-auth="login">Login</button>
+        <button class="btn btn-primary" data-open-auth="signup">Sign Up</button>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div id="mobileMenu" class="mobile-menu" hidden>
+      <nav class="mobile-nav" aria-label="Mobile">
+        <a href="#home" class="mobile-link">Home</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#how" class="mobile-link">How It Works</a>
+        <a href="#campus" class="mobile-link">Campuses</a>
+        <div class="mobile-auth">
+          <button class="btn btn-outline full" data-open-auth="login">Login</button>
+          <button class="btn btn-primary full" data-open-auth="signup">Sign Up</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 class="h1">Stop Wasting Meal Swipes. Start Saving.</h1>
+          <p class="lead">Match your extra meals with students on your campus. Earn back value, discover deals, and make your meal plan work for you.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg" data-open-auth="signup">Get Started</button>
+            <a class="btn btn-ghost btn-lg" href="#how">Learn More</a>
+          </div>
+          <div class="hero-badges">
+            <div class="badge">
+              <span class="kpi">32%</span>
+              <span class="kpi-sub">avg. savings</span>
+            </div>
+            <div class="badge">
+              <span class="kpi">12k+</span>
+              <span class="kpi-sub">meals matched</span>
+            </div>
+            <div class="badge">
+              <span class="kpi">40+</span>
+              <span class="kpi-sub">campuses</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div id="cardPreview" class="app-mock">
+            <div class="mock-header">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="mock-title">Demo Preview</span>
+            </div>
+            <div class="mock-body">
+              <div class="progress">
+                <div class="progress-bar" style="width: 50%"></div>
+              </div>
+              <div class="progress-legend">
+                <div class="legend-item"><span class="legend-dot"></span><span>Used: —</span></div>
+                <div class="legend-item"><span class="legend-dot alt"></span><span>Remaining: —</span></div>
+              </div>
+              <div class="risk-card">
+                <div class="risk-icon" aria-hidden="true">ℹ️</div>
+                <div class="risk-copy">
+                  <div class="risk-title">Preview</div>
+                  <div class="risk-sub">Sign in to see your balance</div>
+                </div>
+                <button class="btn btn-sm btn-primary" data-open-auth="signup">Create Account</button>
+              </div>
+              <div class="mock-grid">
+                <div class="mini-card">
+                  <div class="mini-title">Top Deal</div>
+                  <div class="mini-value">$7.40</div>
+                  <div class="mini-sub">Avg. swipe value</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-title">Matches</div>
+                  <div class="mini-value">—</div>
+                  <div class="mini-sub">After sign in</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-title">Trend</div>
+                  <div class="mini-value">—</div>
+                  <div class="mini-sub">Personalized later</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="cardBalance" class="app-mock hidden" hidden>
+            <div class="mock-header">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="mock-title">Weekly Balance</span>
+            </div>
+            <div class="mock-body">
+              <div class="progress">
+                <div id="balanceBar" class="progress-bar" style="width: 0%"></div>
+              </div>
+              <div class="progress-legend">
+                <div class="legend-item"><span class="legend-dot"></span><span id="usedLabel">Used: 0</span></div>
+                <div class="legend-item"><span class="legend-dot alt"></span><span id="remLabel">Remaining: 0</span></div>
+              </div>
+              <div class="risk-card">
+                <div class="risk-icon" aria-hidden="true">⚠️</div>
+                <div class="risk-copy">
+                  <div class="risk-title">At Risk</div>
+                  <div id="riskSub" class="risk-sub">No data</div>
+                </div>
+                <button class="btn btn-sm btn-primary" data-open-auth="signup">Offer Meals</button>
+              </div>
+              <div class="mock-grid">
+                <div class="mini-card">
+                  <div class="mini-title">Top Deal</div>
+                  <div id="topDeal" class="mini-value">$0.00</div>
+                  <div class="mini-sub">Avg. swipe value</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-title">Matches</div>
+                  <div id="matchesVal" class="mini-value">0</div>
+                  <div class="mini-sub">This week</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-title">Trend</div>
+                  <div id="trendVal" class="mini-value">0%</div>
+                  <div class="mini-sub">Vs last week</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-cta">
+            <button class="btn btn-secondary" data-open-auth="signup">Offer Extra Meals</button>
+            <button class="btn btn-outline" data-open-auth="login">Browse Deals</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="value-prop">
+      <div class="container vp-grid">
+        <div class="vp-card">
+          <div class="vp-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M12 3v18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="h4">Monetize Extras</h3>
+          <p>Turn unused swipes into value by matching with students who need them before they expire.</p>
+        </div>
+        <div class="vp-card">
+          <div class="vp-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12l4 4 12-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="h4">Verified Campus Deals</h3>
+          <p>See what’s actually a good buy across dining halls with live value ratings and community votes.</p>
+        </div>
+        <div class="vp-card">
+          <div class="vp-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 8v8m-4-4h8M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="h4">Smart Forecasts</h3>
+          <p>Predict usage and get alerts if you’re on track to waste meals. Adjust in time.</p>
+        </div>
+        <div class="vp-card">
+          <div class="vp-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="h4">Marketplace Access</h3>
+          <p>List extras, browse offers, and close deals with transparent pricing and timing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how-it-works">
+      <div class="container">
+        <h2 class="h2 align-center">How It Works</h2>
+        <p class="sub align-center">Four simple steps to unlock more value from your meal plan.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none"><path d="M12 6v12m-6-6h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="h5">Sign Up</h3>
+            <p>Create your account and select your university and meal plan.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none"><path d="M3 12h18M12 3v18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="h5">Track & Predict</h3>
+            <p>We estimate usage and flag meals likely to expire.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="h5">Match & Save</h3>
+            <p>List extra meals or grab value deals from others.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none"><path d="M12 1v4m0 14v4m9-9h-4M7 12H3m13.657-6.343l-2.829 2.829M7.172 14.828l-2.829 2.829" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="h5">Repeat</h3>
+            <p>Keep optimizing as your schedule changes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="container testi-grid">
+        <div class="testi-card">
+          <div class="quote">“I saved over $120 this semester and stopped letting meals expire.”</div>
+          <div class="author">
+            <div class="avatar">A</div>
+            <div>
+              <div class="name">Alex M.</div>
+              <div class="meta">Sophomore, State U</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-stats">
+          <div class="stat">
+            <div class="stat-kpi">+$9.10</div>
+            <div class="stat-sub">avg. recovered per swipe</div>
+          </div>
+          <div class="stat">
+            <div class="stat-kpi">78%</div>
+            <div class="stat-sub">reduce waste risk</div>
+          </div>
+          <div class="stat">
+            <div class="stat-kpi">24h</div>
+            <div class="stat-sub">median time to match</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="campus" class="campus">
+      <div class="container">
+        <h2 class="h2 align-center">Now Supporting Campuses Nationwide</h2>
+        <p class="sub align-center">Request your campus if you don’t see it.</p>
+        <div class="chip-grid">
+          <span class="chip">IIT Chicago</span>
+          <span class="chip">UCLA</span>
+          <span class="chip">UT Austin</span>
+          <span class="chip">UIUC</span>
+          <span class="chip">UMich</span>
+          <span class="chip">Purdue</span>
+          <span class="chip">Georgia Tech</span>
+          <span class="chip">NYU</span>
+          <span class="chip">ASU</span>
+          <span class="chip">UF</span>
+          <span class="chip">Ohio State</span>
+          <span class="chip">Wisconsin</span>
+        </div>
+        <div class="campus-cta">
+          <button class="btn btn-primary" data-open-auth="signup">Join Now</button>
+          <button class="btn btn-outline" data-open-request="campus">Request Campus</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-wide">
+      <div class="container cta-inner">
+        <h2 class="h2">Ready to get more from your meal plan?</h2>
+        <p class="sub">Create a free account in under a minute.</p>
+        <div>
+          <button class="btn btn-secondary btn-lg" data-open-auth="signup">Create Account</button>
+          <button class="btn btn-ghost btn-lg" data-open-auth="login">I already have an account</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Campus comments section -->
+    <section class="comments-section">
+      <div class="container">
+        <h2 class="h2 align-center">Campus Voices</h2>
+        <p class="sub align-center">Hear from students using the marketplace.</p>
+        <ul id="publicComments" class="comments-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <span class="brand-mark" aria-hidden="true">🍴</span>
+          <span class="brand-text">Meal & Marketplace</span>
+        </a>
+        <p class="footer-copy">A smarter way to manage meal swipes and find value on campus.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Product</div>
+        <a href="#how" class="footer-link">How It Works</a>
+        <a href="#campus" class="footer-link">Campuses</a>
+        <a href="#" class="footer-link" data-open-auth="signup">Get Started</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Company</div>
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Contact</a>
+        <a href="#" class="footer-link">Careers</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Legal</div>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Campus Policy</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>© <span id="year"></span> Meal & Marketplace</div>
+      <div class="socials">
+        <a href="#" aria-label="X" class="social">X</a>
+        <a href="#" aria-label="Instagram" class="social">Instagram</a>
+        <a href="#" aria-label="LinkedIn" class="social">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="authModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" aria-label="Close" data-close>&times;</button>
+      <div class="modal-header">
+        <h3 class="h3" id="authTitle">Create your account</h3>
+        <p class="sub" id="authSubtitle">Join your campus and start saving today.</p>
+      </div>
+      <form id="authForm" class="form">
+        <input type="hidden" id="authMode" name="mode" value="signup" />
+        <div class="field">
+          <label for="authEmail">Email</label>
+          <input id="authEmail" name="email" type="email" inputmode="email" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="authPassword">Password</label>
+          <input id="authPassword" name="password" type="password" autocomplete="current-password" minlength="8" />
+        </div>
+        <div class="field-inline">
+          <input id="rememberMe" type="checkbox" />
+          <label for="rememberMe">Remember me</label></div>
+
+        <div class="signup-only">
+          <div class="field">
+            <label for="authUniversity">University</label>
+            <select id="authUniversity" name="university">
+              <option value="">Select your campus</option>
+              <option>IIT Chicago</option>
+              <option>UCLA</option>
+              <option>UT Austin</option>
+              <option>UIUC</option>
+              <option>UMich</option>
+              <option>Purdue</option>
+              <option>Georgia Tech</option>
+              <option>NYU</option>
+            </select>
+          </div>
+          <div class="field-inline">
+            <div class="field">
+              <label for="authMeals">Total Meals</label>
+              <input id="authMeals" name="totalMeals" type="number" min="0" step="1" placeholder="120" />
+            </div>
+            <div class="field">
+              <label for="authExpiry">Plan Expiration</label>
+              <input id="authExpiry" name="expiration" type="date" />
+            </div>
+          </div>
+
+          <!-- Meal plan distribution selection -->
+          <div class="field">
+            <label for="authMealDistribution">Meal Plan Distribution</label>
+            <select id="authMealDistribution" name="mealDistribution">
+              <option value="semester">Full semester allotment (all at once)</option>
+              <option value="weekly">Weekly allotment</option>
+            </select>
+          </div>
+          <!-- Number of meals per week (shown only when weekly is selected) -->
+          <div class="field" id="weeklyMealsField" style="display:none;">
+            <label for="authWeeklyMeals">Meals per Week</label>
+            <input id="authWeeklyMeals" name="weeklyMeals" type="number" min="0" step="1" placeholder="14" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary full" id="authSubmit">Create Account</button>
+        <div class="alt-auth">
+          <button type="button" class="btn btn-google full" id="googleAuth"><span class="g"></span>Continue with Google</button>
+        </div>
+        <p class="tos">By continuing you agree to our Terms and Privacy Policy.</p>
+        <div class="auth-switch">
+          <button type="button" class="btn btn-ghost full" data-switch-auth="login">Have an account? Log in</button>
+          <button type="button" class="btn btn-outline full" data-switch-auth="signup">New here? Create an account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="api-base" content="">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <!-- Reuse core styles from main site -->
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    /* Additional admin-specific tweaks */
+    body { background: var(--bg); color: var(--text); }
+    .admin-container { padding-top: 24px; }
+    .admin-grid { display: grid; gap: 24px; }
+    .admin-grid .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+    .admin-grid .card h4 { margin: 0 0 12px; font-size: 18px; color: var(--text); }
+    .admin-grid .table-scroll { max-height: 300px; overflow-y: auto; }
+    /* Smaller fonts for admin tables */
+    .admin-grid .table th, .admin-grid .table td { font-size: 13px; }
+  </style>
+  <script src="/config.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-bar">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true">🍴</span>
+        <span class="brand-text">Admin Dashboard</span>
+      </a>
+      <div class="profile-wrap">
+        <span id="adminEmail" class="profile-name">Admin</span>
+        <button id="adminSignOut" class="btn btn-sm btn-outline">Sign Out</button>
+      </div>
+    </div>
+  </header>
+  <main class="container admin-container">
+    <h2 class="h2" style="margin-bottom:20px;">Website Monitoring</h2>
+    <div id="adminContent" class="admin-grid"></div>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>
